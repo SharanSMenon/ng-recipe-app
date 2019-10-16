@@ -1,0 +1,47 @@
+<div class="row text-center signin">
+
+  <div class="col-lg-12 mt-auto mb-auto">
+    <div class="d-flex justify-content-center">
+      <app-alert [message]="error" *ngIf="error" (close)="onHandleErorr()"></app-alert>
+<!--      <div class="alert alert-danger width-330px" *ngIf="error">-->
+<!--        {{ error }}-->
+<!--      </div>-->
+    </div>
+    <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+    <form *ngIf="!isLoading" class="form-signin" #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
+      <label for="inputEmail" class="sr-only">Email address</label>
+      <input type="email"
+             id="inputEmail"
+             class="form-control"
+             placeholder="Email address"
+             required
+             autofocus
+             ngModel
+             name="email"
+      >
+      <label for="inputPassword" class="sr-only">Password</label>
+      <input type="password"
+             id="inputPassword"
+             class="form-control"
+             placeholder="Password"
+             ngModel
+             name="password"
+             required
+             minlength="6"
+      >
+      <button class="btn btn-lg btn-primary btn-block"
+              type="submit"
+              [disabled]="!authForm.valid"
+      >
+        {{ isLoginMode ? "Login" : "Signup"}}
+      </button>
+      <button class="btn btn-link btn-block"
+              (click)="onSwitchMode()"
+              type="button"
+      >
+        {{ isLoginMode ? "Need an account? Signup" : "Already Have An Account? Login"}}
+      </button>
+      <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+    </form>
+  </div>
+</div>
